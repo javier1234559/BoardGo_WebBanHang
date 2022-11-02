@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&family=Poppins:ital,wght@0,200;0,300;0,500;0,600;0,800;1,400;1,700&family=Quicksand:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+:root {
+  /* Header Styles */
+  --header-height: 72px;
+
+  /* Color Style */
+  --black-color:#000;
+  --white-color:#fff;
+  --shop-color-main: #dd4c09;
+  --shop-color-text: #252a2b;
+  --shop-color-title: #943908;
+  --shop-color-hover: #50e3c2;
+  --shop-color-button: #263b96;
+  --shop-color-border: #eae4e8;
+  --home-category-bg-1: #faf1ff;
+  --home-category-bg-2: #faf4eb;
+  --home-category-bg-3: #f4e6e5;
+  --home-category-bg-4: #e6f2f4;
+  --home-category-bg-5: #fff6f6;
+  --home-coupon-bg: #ffffff;
+  --home-coupon-light: #ffffff;
+  --home-coupon-border: #f8d0d3;
+  --home-coupon-text: #333333;
+  --home-collection1-bg: #f8bea5;
+  --home-collection1-icon: #dd4c09;
+  --home-collection1-color-text: #943908;
+  --home-categorize-bg: #dee4e9;
+  --home-categorize-color: #dd4c09;
+  --home-collection2-bg: #adc4d2;
+  --home-collection2-title: #ff0000;
+  --home-collection3-bg: #e9dabe;
+  --footer-bg-color-1: #2a2a2a;
+  --footer-bg-color-2: #2a2a2a;
+  --footer-bg-color-copyright: #222222;
+  --footer-color-title: #ffffff;
+  --footer-color-text: #aaaaaa;
+  --footer-color-hover: #50e3c2;
+
+  /* Font */
+  --quick-sand-font: "Quicksand", sans-serif;
+  /* Font Size */
+  --nav-font: 3rem;
+  --title-font: 6.5rem;
+  --sub-title-font: 2.5rem;
+  --normal-font: 2.4rem;
+  --sub-normal-font: 1.6rem;
+  --tiny-font: 1.5rem;
+
+  /* z-index */
+  --z-fixed: 10;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  line-height: 30px;
+  /* border: 1px solid #000; */
+}
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+  font-family: var(--quick-sand-font);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+
+/* ===================================================== RE-USE CLASS ======================================= */
+
+
+.disable-link {
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* ===================================================== LAYOUT SETUP ====================================== */
+
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1265px;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+section,
+footer {
+  padding: 3rem 0;
+}
+section {
+  min-height: 400px;
+}
+
+.wide {
+  width: 90%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  }
+.flex-space-around{
+  display: flex;
+  justify-content: space-around;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
