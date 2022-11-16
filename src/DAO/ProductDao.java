@@ -10,8 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.dialect.function.VarArgsSQLFunction;
 
 import entities.Product;
+
 
 public class ProductDao {
         private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
@@ -25,10 +27,10 @@ public class ProductDao {
         private static final String INSERT = "INSERT INTO user(name, tel, passwd) VALUES(?, ?, ?)";
         private static final String UPDATE = "UPDATE user SET name=?, tel=?, passwd=? WHERE id=?";
         
-        private static final String FIND_ALL = "SELECT * FROM product ORDER BY id";
-        private static final String FIND_ALL_COLOR = "SELECT DISTINCT color FROM product2 ORDER BY id";
-        private static final String FIND_ALL_RANK = "SELECT DISTINCT productrank FROM product2 ORDER BY productrank";
-        private static final String FIND_ALL_PRICE = "SELECT DISTINCT price FROM product2 ORDER BY price;";
+        public  static final String FIND_ALL = "SELECT * FROM product ORDER BY id";
+        public static final String FIND_ALL_COLOR = "SELECT DISTINCT color FROM product2 ORDER BY id";
+        public static final String FIND_ALL_RANK = "SELECT DISTINCT productrank FROM product2 ORDER BY productrank";
+        public static final String FIND_ALL_PRICE = "SELECT DISTINCT price FROM product2 ORDER BY price;";
         
         
     private Connection getConnection() {
@@ -74,12 +76,14 @@ public class ProductDao {
               close(stmt);
               close(conn);
           }
-
+          list.forEach(a -> { System.out.print(a); });
           return list;
       }
     public List<String> getDistinctColor(){
+    	
         Connection conn = null;
         PreparedStatement stmt = null;
+        
         List<String> list = new ArrayList<>();
         try {
             conn = getConnection();
@@ -92,6 +96,7 @@ public class ProductDao {
                 System.out.print(color);
                 list.add(color);
             }
+            
         } catch (SQLException e) {
             // e.printStackTrace();
             throw new RuntimeException(e);
@@ -99,8 +104,10 @@ public class ProductDao {
             close(stmt);
             close(conn);
         }
-
+        
+        
         return list;
+     
     }
     private static void close(Connection con) {
         if (con != null) {
