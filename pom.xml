@@ -51,6 +51,13 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.6.7.Final</version>	
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
 
 	</dependencies>
 

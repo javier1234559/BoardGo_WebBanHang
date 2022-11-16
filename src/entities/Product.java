@@ -5,8 +5,10 @@ public class Product {
     private long id;
     private String title ;
     private long price;
-    private String size;
     private String color;
+    private String category;
+    private int productrank;
+    private int favorite;
     private String description;
     private String image;
 
@@ -14,69 +16,92 @@ public class Product {
 
     }
 
-    public Product(long id, String title, long price, String size, String color, String description, String image) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.size = size;
-        this.color = color;
-        this.description = description;
-        this.image = image;
-    }
+    
+	public Product(long id, String title, long price, String color, String category, int productrank, int favorite,String description, String image) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.price = price;
+		this.color = color;
+		this.category = category;
+		this.productrank = productrank;
+		this.favorite = favorite;
+		this.description = description;
+		this.image = image;
+	}
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public long getPrice() {
-        return price;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setPrice(long price) {
-        this.price = price;
-    }
+	public long getPrice() {
+		return price;
+	}
 
-    public String getSize() {
-        return size;
-    }
+	public void setPrice(long price) {
+		this.price = price;
+	}
 
-    public void setSize(String size) {
-        this.size = size;
-    }
+	public String getColor() {
+		return color;
+	}
 
-    public String getColor() {
-        return color;
-    }
+	public void setColor(String color) {
+		this.color = color;
+	}
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+	public String getCategory() {
+		return category;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public int getProductrank() {
+		return productrank;
+	}
 
-    public String getImage() {
-        return image;
-    }
+	public void setProductrank(int productrank) {
+		this.productrank = productrank;
+	}
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+	public int getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(int favorite) {
+		this.favorite = favorite;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+    
+    
 }

@@ -20,12 +20,15 @@ public class ProductDao {
         private static final String PASS = "nhat2382002";
 
         private static final String DELETE = "DELETE FROM user WHERE id=?";
-        private static final String FIND_ALL = "SELECT * FROM demo ORDER BY id";
         private static final String FIND_BY_ID = "SELECT * FROM user WHERE id=?";
         private static final String FIND_BY_NAME = "SELECT * FROM user WHERE name=?";
         private static final String INSERT = "INSERT INTO user(name, tel, passwd) VALUES(?, ?, ?)";
         private static final String UPDATE = "UPDATE user SET name=?, tel=?, passwd=? WHERE id=?";
-
+        
+        private static final String FIND_ALL = "SELECT * FROM product ORDER BY id";
+        private static final String FIND_ALL_COLOR = "SELECT DISTINCT color FROM product2 ORDER BY id";
+        private static final String FIND_ALL_RANK = "SELECT DISTINCT productrank FROM product2 ORDER BY productrank";
+        private static final String FIND_ALL_PRICE = "SELECT DISTINCT price FROM product2 ORDER BY price;";
         
         
     private Connection getConnection() {
@@ -39,6 +42,7 @@ public class ProductDao {
     }
     
     public List<Product> getAllProduct(){
+
           Connection conn = null;
           PreparedStatement stmt = null;
           List<Product> list = new ArrayList<Product>();
@@ -54,9 +58,11 @@ public class ProductDao {
                   user.setId(rs.getInt("id"));
                   user.setTitle(rs.getString("title"));
                   user.setPrice(rs.getInt("price"));
-                  user.setSize(rs.getString("size"));
                   user.setColor(rs.getString("color"));
-                  user.setDescription(rs.getString("description"));
+                  user.setCategory(rs.getString("category"));
+                  user.setProductrank(rs.getInt("productrank"));
+                  user.setFavorite(rs.getInt("favorite"));
+                  user.setDescription(rs.getString("productdesciption"));
                   user.setImage(rs.getString("image"));
                   System.out.print(user.getId());
                   list.add(user);
@@ -71,6 +77,31 @@ public class ProductDao {
 
           return list;
       }
+    public List<String> getDistinctColor(){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        List<String> list = new ArrayList<>();
+        try {
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(FIND_ALL_COLOR);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+            	String color = rs.getString("color");
+                System.out.print(color);
+                list.add(color);
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+
+        return list;
+    }
     private static void close(Connection con) {
         if (con != null) {
             try {

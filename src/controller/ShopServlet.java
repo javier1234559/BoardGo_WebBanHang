@@ -45,23 +45,17 @@ public class ShopServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("do Post");
-
         String url = "/shop.jsp";
+        List<String>  DistinctColorList = new ArrayList<>();
         List<Product> productList = new ArrayList<>();
-/*        Product temp = new Product(4,"May Anh",13000,"L","green","fshgshs","img/product-1.jpg");*/
-/*        productList.add(new Product(4,"May Anh",13000,"L","green","fshgshs","img/product-1.jpg"));
-        productList.add(new Product(4,"May Anh",13000,"L","green","fshgshs","img/product-2.jpg"));
-        productList.add(new Product(3,"May Anh",13000,"L","green","fshgshs","img/product-3.jpg"));
-        productList.add(new Product(4,"May Anh",13000,"L","green","fshgshs","img/product-4.jpg"));
-        productList.add(new Product(4,"May Anh",13000,"L","green","fshgshs","img/product-5.jpg"));*/
         
-        
+        DistinctColorList = productDao.getDistinctColor();
         productList = productDao.getAllProduct();
         
+        request.setAttribute("DistinctColorList", DistinctColorList);
         request.setAttribute("productList", productList);
         RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
-        /*getServletContext().getRequestDispatcher(url).forward(request,response);*/
+        
     }
 }
