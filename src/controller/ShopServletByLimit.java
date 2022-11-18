@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.protobuf.Int32Value;
+
 import DAO.ProductDao;
 import entities.Product;
 import entities.productDetail;
@@ -33,7 +35,7 @@ public class ShopServletByLimit extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/HOME/shop.jsp";
 	    
-		String limitid = request.getParameter("cid");
+		int limitid = Integer.parseInt(request.getParameter("cid"));
 		
 		System.out.print(limitid);
 		
@@ -44,7 +46,7 @@ public class ShopServletByLimit extends HttpServlet {
         
         //Get datafrom database
    
-        List<Product> productList = productDao.getAllProductByID(queryallproducts,limitid);
+        List<Product> productList = productDao.getAllProductByIDINT(queryallproducts, limitid);
         List<Product> productListbyprice = productDao.getAllProduct(queryprice);
         List<Product> productListbycategory = productDao.getAllProduct(querycategory);
         List<productDetail> productDetails = productDao.getAllProductDetail(querycolor);

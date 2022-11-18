@@ -44,7 +44,7 @@ public class ProductDao {
         public static final String FIND_BY_PRODUCT_BY_COLOR = "SELECT * FROM product WHERE idproduct IN (SELECT distinct idproduct FROM image_product  WHERE color in (SELECT distinct color FROM image_product  WHERE idimage = ?));";
         
         //ShopServletByOffset
-        public static final String FIND_BY_PRODUCT_BY_LIMIT = "SELECT * FROM product ORDER BY idproduct LIMIT ? ;";
+        public static final String FIND_BY_PRODUCT_BY_LIMIT = "SELECT * FROM product ORDER BY idproduct LIMIT ? ";
         
     private Connection getConnection() {
 	    try {
@@ -64,8 +64,6 @@ public class ProductDao {
               conn = getConnection();
               System.out.print("Connnect to database successfully");
               stmt = conn.prepareStatement(query);
-              /*stmt = conn.prepareStatement(query);
-              stmt.setString(1, "82");*/
               ResultSet rs = stmt.executeQuery();
 
               while (rs.next()) {
@@ -153,7 +151,38 @@ public class ProductDao {
         return list;
     }
     
-    
+    public List<Product> getAllProductByIDINT(String query,int id){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        List<Product> list = new ArrayList<Product>();
+        try {
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(query);
+                       	
+            stmt.setInt(1, id);
+            
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+          	  Product product= new Product();
+	              product.setIdproduct(rs.getInt("idproduct"));
+	              product.setNameproduct(rs.getString("nameproduct"));
+	              product.setPrice(rs.getLong("price"));
+	              product.setCategory(rs.getString("category"));
+	              product.setImage(rs.getString("image"));
+	              list.add(product);
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+        list.forEach(a -> { System.out.print(a); });
+        return list;
+    }
     private static void close(Connection con) {
         if (con != null) {
             try {

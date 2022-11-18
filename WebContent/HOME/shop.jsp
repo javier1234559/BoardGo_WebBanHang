@@ -206,16 +206,17 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="ShopServlet">Latest</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
+                                    <a class="dropdown-item" href="ShopServlet">MỚI NHẤT</a>
+                                    <a class="dropdown-item" href="#">ĐÁNH GIÁ CAO</a>
                                 </div>
                             </div>
                             <div class="btn-group ml-2">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
                                 <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="ShopServletByLimit?cid=5">5</a>
+                                    <a class="dropdown-item" href="ShopServletByLimit?cid=7">7</a>
                                     <a class="dropdown-item" href="ShopServletByLimit?cid=10">10</a>
-                                    <a class="dropdown-item" href="ShopServletByLimit?cid=20">20</a>
-                                    <a class="dropdown-item" href="ShopServletByLimit?cid=30">30</a>
+                                    <a class="dropdown-item" href="ShopServletByLimit?cid=15">15</a>
                                 </div>
                             </div>
                         </div>
