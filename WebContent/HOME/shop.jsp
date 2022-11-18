@@ -1,4 +1,5 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,21 +130,19 @@
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <!-- Price Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">SẮP XẾP THEO GIÁ</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="price-all">
-                        <label class="custom-control-label" for="price-all">All Price</label>
+                        <label for="size-all"><a href="ShopServlet" style="text-decoration:none;color:<%="red"%>;">Tất cả giá</a></label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
-                    <c:forEach items="${DistinctPriceList}" var="price" >
+                    <c:forEach items="${productListbyprice}" var="o" >
 	                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-	                        <input type="checkbox" class="custom-control-input" id="price-1">
-	                        <label class="custom-control-label" for="price-1">$${price}</label>
+	                        <label class="" for="size-1"><a href="ShopServletByPrice?cid=${o.idproduct}" style="text-decoration:none;color:#6C757D;">${o.price}</a></label>
 	                        <span class="badge border font-weight-normal">150</span>
 	                    </div>
-	                    
                     </c:forEach>
                  
                 </form>
@@ -151,18 +150,17 @@
             <!-- Price End -->
 
             <!-- Color Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">SẮP XẾP THEO MÀU</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="price-all">All Color</label>
+                        <label style="<%="color:red;" %>" for="size-all"><a href="ShopServlet" style="text-decoration:none;color:<%="red"%>;">Tất Cả Màu</a></label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
-                    <c:forEach items="${DistinctColorList}" var="color">
+                    <c:forEach items="${productDetails}" var="o">
 	                       <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-	                        <input type="checkbox" class="custom-control-input" id="color-1">
-	                        <label class="custom-control-label" for="color-1">${color}</label>
+	                        <label class="" for="size-1"><a href="ShopServletByColor?cid=${o.idimage}" style="text-decoration:none;color:#6C757D;">${o.color}</a></label>
 	                        <span class="badge border font-weight-normal">99</span>
 	                    	</div>
                     </c:forEach>
@@ -174,18 +172,17 @@
             <!-- Color End -->
 
             <!-- Size Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">SẮP XẾP THEO LOẠI</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="size-all">
-                        <label class="custom-control-label" for="size-all">All Size</label>
+                        
+                        <label style="<%="color:red;" %>" for="size-all"><a href="" style="text-decoration:none;color:<%="red"%>;">Theo Loại</a></label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
-                    <c:forEach items="${DistinctCategoryList}" var="category" >
+                    <c:forEach items="${productListbycategory}" var="o" >
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-1">
-                        <label class="custom-control-label" for="size-1">${category}</label>
+                        <label class="" for="size-1"><a href="ShopServletByCategory?cid=${o.idproduct}" style="text-decoration:none;color:#6C757D;">${o.category}</a></label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
 					</c:forEach>
@@ -209,17 +206,16 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
+                                    <a class="dropdown-item" href="ShopServlet">Latest</a>
                                     <a class="dropdown-item" href="#">Best Rating</a>
                                 </div>
                             </div>
                             <div class="btn-group ml-2">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">10</a>
-                                    <a class="dropdown-item" href="#">20</a>
-                                    <a class="dropdown-item" href="#">30</a>
+                                    <a class="dropdown-item" href="ShopServletByLimit?cid=10">10</a>
+                                    <a class="dropdown-item" href="ShopServletByLimit?cid=20">20</a>
+                                    <a class="dropdown-item" href="ShopServletByLimit?cid=30">30</a>
                                 </div>
                             </div>
                         </div>
@@ -229,7 +225,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" style="max-width: 100%; height: 250px; object-fit: cover" src="${o.image}.jpg" alt="">
+                            <img class="img-fluid w-100" style="max-width: 100%; height: 250px; object-fit: cover" src="${o.image}" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -238,9 +234,9 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">${o.title}</a>
+                            <a class="h6 text-decoration-none text-truncate" href="">${o.nameproduct}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$${o.price}</h5><h6 class="text-muted ml-2"><del>$${o.price}</del></h6>
+                                <h5><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.price-1000000}"/>VNĐ</h5><h6 class="text-muted ml-2"><del><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.price}"/>VNĐ</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
                                 <small class="fa fa-star text-primary mr-1"></small>

@@ -3,6 +3,7 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.PseudoColumnUsage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,12 +28,19 @@ public  class Generic<T> {
     private static final String INSERT = "INSERT INTO user(name, tel, passwd) VALUES(?, ?, ?)";
     private static final String UPDATE = "UPDATE user SET name=?, tel=?, passwd=? WHERE id=?";
     
-    public static final String FIND_ALL = "SELECT * FROM product ORDER BY id";
-    public static final String FIND_ALL_COLOR = "SELECT DISTINCT color FROM product ORDER BY id";
+    public static final String FIND_ALL = "SELECT * FROM product ORDER BY idproduct";
+    public static final String FIND_ALL_COLOR = "SELECT DISTINCT color FROM image_poduct ORDER BY idimage";
     public static final String FIND_ALL_RANK = "SELECT DISTINCT productrank FROM product ORDER BY productrank";
     public static final String FIND_ALL_PRICE = "SELECT DISTINCT price FROM product ORDER BY price;";
     public static final String FIND_ALL_CATEGORY = "SELECT DISTINCT category FROM product";
-	    
+    private static final String FIND_BY_PRODUCT_ID = "SELECT * FROM product WHERE id=?";
+    private static final String FIND_BY_PRODUCT_IDCOLOR = "SELECT * FROM product ,image_poduct where product.idproduct = image_poduct.idproduct AND image_poduct.color='?'";
+    
+    
+    public List<T> list ; // dung de chua du lieu
+    
+    public Generic() {
+    }
     
 	private Connection getConnection() {
 	    try {
@@ -44,25 +52,19 @@ public  class Generic<T> {
 	    }
 	}
 	
-	public List<T> list ;
-	
-    public Generic() {
-		
-    }
-
     public  List<T> addList(T item){
         list.add(item);
         
         return list ;
     }
+    
     public void loopfixbug(){
     	for(T item : list) {
         	System.out.println(item);
         }
     }
     
-	public List<T> getAllProduct(){
-	
+    public List<T> getAllProduct(){
 	      Connection conn = null;
 	      PreparedStatement stmt = null;
 	      List<Product> list = new ArrayList<Product>();
@@ -74,18 +76,44 @@ public  class Generic<T> {
 	          ResultSet rs = stmt.executeQuery();
 	
 	          while (rs.next()) {
-	              Product user= new Product();
-	              user.setId(rs.getInt("id"));
-	              user.setTitle(rs.getString("title"));
-	              user.setPrice(rs.getInt("price"));
-	              user.setColor(rs.getString("color"));
-	              user.setCategory(rs.getString("category"));
-	              user.setProductrank(rs.getInt("productrank"));
-	              user.setFavorite(rs.getInt("favorite"));
-	              user.setDescription(rs.getString("productdesciption"));
-	              user.setImage(rs.getString("image"));
-	              System.out.print(user.getId());
-	              list.add(user);
+	              Product product= new Product();
+	              product.setIdproduct(rs.getInt("idproduct"));
+	              product.setNameproduct(rs.getString("idproduct"));
+	              product.setPrice(rs.getLong("price"));
+	              product.setCategory(rs.getString("category"));
+	              product.setImage(rs.getString("image"));
+	              list.add(product);
+	          }
+	      } catch (SQLException e) {
+	          // e.printStackTrace();
+	          throw new RuntimeException(e);
+	      } finally {
+	          close(stmt);
+	          close(conn);
+	      }
+	      
+	      return (List<T>) list;
+	  }
+	public List<T> getAllProductByID(String id){
+		  Connection conn = null;
+	      PreparedStatement stmt = null;
+	      List<Product> list = new ArrayList<Product>();
+		
+	      try {
+	    	  conn = getConnection();
+	          System.out.print("Connnect to database successfully");
+	          stmt = conn.prepareStatement(FIND_BY_PRODUCT_IDCOLOR);
+	          stmt.setString(1, id);
+	          ResultSet rs = stmt.executeQuery();
+	
+	          while (rs.next()) {
+	              Product product= new Product();
+	              product.setIdproduct(rs.getInt("idproduct"));
+	              product.setNameproduct(rs.getString("nameproduct"));
+	              product.setPrice(rs.getLong("price"));
+	              product.setCategory(rs.getString("category"));
+	              product.setImage(rs.getString("image"));
+	              list.add(product);
 	          }
 	      } catch (SQLException e) {
 	          // e.printStackTrace();
@@ -125,6 +153,7 @@ public  class Generic<T> {
 	    return (List<T>) list;
 	   
 	}
+	
 	private static void close(Connection con) {
 	    if (con != null) {
 	        try {
