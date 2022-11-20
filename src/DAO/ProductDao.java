@@ -39,12 +39,20 @@ public class ProductDao {
         public static final String FIND_PRODUCT_GROUPBY_CATEGORY = "SELECT * FROM product group by category ORDER BY idproduct asc;";
         
         //ShopServletByCategory
-        public static final String FIND_BY_PRODUCT_BY_CATEGORY = "SELECT * FROM product WHERE category IN (SELECT category FROM product  WHERE idproduct = ? );";
+        public static final String FIND_BY_PRODUCT_BY_CATEGORY = "SELECT * FROM product WHERE category IN (SELECT category FROM product  WHERE idproduct = ? ) lIMIT 5 ;";
         public static final String FIND_BY_PRODUCT_BY_PRICE = "SELECT * FROM product WHERE price IN (SELECT price FROM product  WHERE idproduct = ? );";
         public static final String FIND_BY_PRODUCT_BY_COLOR = "SELECT * FROM product WHERE idproduct IN (SELECT distinct idproduct FROM image_product  WHERE color in (SELECT distinct color FROM image_product  WHERE idimage = ?));";
         
-        //ShopServletByOffset
+        //ShopServletByLIMIT
         public static final String FIND_BY_PRODUCT_BY_LIMIT = "SELECT * FROM product ORDER BY idproduct LIMIT ? ";
+        //ShopServletPagination 
+        public static final String COUNT_PRODUCT = "Select Count(*) from product ;";
+        public static final String FIND_PRODUCT_BY_PAGINATION = "SELECT * FROM product LIMIT ?,3"; //thay doi gia tri 3 thanh 9
+        
+        //DetailServlet
+        public static final String FIND_PRODUCT_BY_ID = "SELECT * FROM product WHERE idproduct =?";
+        public static final String FIND_PRODUCT_DETAIL_BY_IDPRODUCT = "Select * From image_product where idproduct = ?";
+        
         
     private Connection getConnection() {
 	    try {
@@ -57,34 +65,35 @@ public class ProductDao {
     
     //ShopServlet
     public List<Product> getAllProduct(String query){
-          Connection conn = null;
-          PreparedStatement stmt = null;
-          List<Product> list = new ArrayList<Product>();
-          try {
-              conn = getConnection();
-              System.out.print("Connnect to database successfully");
-              stmt = conn.prepareStatement(query);
-              ResultSet rs = stmt.executeQuery();
+    	Connection conn = null;
+        PreparedStatement stmt = null;
+        List<Product> list = new ArrayList<Product>();
+        try {
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
 
-              while (rs.next()) {
-            	  Product product= new Product();
+            while (rs.next()) {
+          	  Product product= new Product();
 	              product.setIdproduct(rs.getInt("idproduct"));
 	              product.setNameproduct(rs.getString("nameproduct"));
 	              product.setPrice(rs.getLong("price"));
 	              product.setCategory(rs.getString("category"));
 	              product.setImage(rs.getString("image"));
 	              list.add(product);
-              }
-          } catch (SQLException e) {
-              // e.printStackTrace();
-              throw new RuntimeException(e);
-          } finally {
-              close(stmt);
-              close(conn);
-          }
-          list.forEach(a -> { System.out.print(a); });
-          return list;
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+        list.forEach(a -> { System.out.print(a); });
+        return list;
       }
+    
     public List<productDetail> getAllProductDetail(String query){
     	/*String query = FIND_PRODUCTDETAIL_GROUPBY_COLOR;*/
     	 Connection conn = null;
@@ -151,6 +160,7 @@ public class ProductDao {
         return list;
     }
     
+    //ShopServletByLimit
     public List<Product> getAllProductByIDINT(String query,int id){
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -183,6 +193,160 @@ public class ProductDao {
         list.forEach(a -> { System.out.print(a); });
         return list;
     }
+    
+    //ShopServletPagination 
+    public int CountProduct(){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(COUNT_PRODUCT);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+            	return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+        return 0;
+    }
+    public List<Product> getAllProductByPagination(int id){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        List<Product> list = new ArrayList<Product>();
+        try {
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(FIND_PRODUCT_BY_PAGINATION);
+                       	
+            stmt.setInt(1, id);
+            
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+          	  Product product= new Product();
+	              product.setIdproduct(rs.getInt("idproduct"));
+	              product.setNameproduct(rs.getString("nameproduct"));
+	              product.setPrice(rs.getLong("price"));
+	              product.setCategory(rs.getString("category"));
+	              product.setImage(rs.getString("image"));
+	              list.add(product);
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+        return list;
+    }
+    
+    //ShopServletSearch
+    public List<Product> getProductBySearch(String txtSearch){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        List<Product> list = new ArrayList<Product>();
+        String query = "select * from product where nameproduct like ?";
+        try {
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1,"%"+ txtSearch + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+          	  Product product= new Product();
+	              product.setIdproduct(rs.getInt("idproduct"));
+	              product.setNameproduct(rs.getString("nameproduct"));
+	              product.setPrice(rs.getLong("price"));
+	              product.setCategory(rs.getString("category"));
+	              product.setImage(rs.getString("image"));
+	              list.add(product);
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+        list.forEach(a -> { System.out.print(a); });
+        return list;
+    }
+    
+    //DetailServlet
+    public Product getProductByID(String query,String id){
+    	Connection conn = null;
+        PreparedStatement stmt = null;
+        Product product = new Product();
+        try {
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(query);
+            
+            stmt.setString(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+	              product.setIdproduct(rs.getInt("idproduct"));
+	              product.setNameproduct(rs.getString("nameproduct"));
+	              product.setPrice(rs.getLong("price"));
+	              product.setCategory(rs.getString("category"));
+	              product.setImage(rs.getString("image"));
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+        
+        return product;
+    	
+    }
+   
+    public List<productDetail> ProductDetailByProductID(String query,String id){
+    	 Connection conn = null;
+         PreparedStatement stmt = null;
+         List<productDetail> list = new ArrayList<productDetail>();
+
+         try {
+             conn = getConnection();
+             System.out.print("Connnect to database successfully");
+             stmt = conn.prepareStatement(query);
+             
+             stmt.setString(1, id);
+             
+             ResultSet rs = stmt.executeQuery();
+
+             while (rs.next()) {
+            	 productDetail productdetail= new productDetail();
+            	 productdetail.setIdimage(rs.getInt("idimage"));
+	             productdetail.setIdproduct(rs.getInt("idproduct"));
+	             productdetail.setColor(rs.getString("color"));
+	             productdetail.setSoluong(rs.getInt("soluong"));
+	             productdetail.setImage(rs.getString("image"));
+	             list.add(productdetail);
+             }
+         } catch (SQLException e) {
+             // e.printStackTrace();
+             throw new RuntimeException(e);
+         } finally {
+             close(stmt);
+             close(conn);
+         }
+         return list;
+     
+    }
+    
     private static void close(Connection con) {
         if (con != null) {
             try {

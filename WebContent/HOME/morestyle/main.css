@@ -1,0 +1,225 @@
+@import url(../Folder-css/base.css);
+
+/* Header styles */
+/* 
+html{
+    font-size: 62.5%;
+}
+header{
+    position: fixed;
+    background-color: var(--black-color);
+    width: 100%;
+    height: var(--header-height);
+}
+.logo-nav{
+    margin-top: -15px;
+    background-color: var(--white-color);
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+header img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    position: top;
+} */
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.header{
+    width: 100%;
+    height: 74px;
+    background-color: #000;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__name{
+    text-transform: uppercase;
+    font-weight: 500;
+    color: red;
+    margin-left: 10px;
+}
+
+.header__item-link{
+    line-height: 74px;
+}
+
+.header__item{
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.header__icon{
+    margin-right: 20px;
+}
+
+.header__icon > i {
+    margin-left: 15px;
+}
+.add-list{
+    position: relative;
+}
+.add-list::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    width: 150px;
+    height: 200px;
+    background-color: red;
+}
+.footer{
+    background: #2a2a2a;
+    line-height: 1.6;
+    position: relative;
+    width: 100%;
+    height: auto;
+    color: #aaaaaa;
+    
+    align-items: center;
+    justify-content: space-between;
+    
+    
+}
+.footer-Newsletter{
+    /* background: #2a2a2a; */
+    padding-top: 20px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgba(255, 255, 255, 0.04);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+    /* display: flex;  */
+    /* align-items: center; */
+    gap: 500px;
+    /* margin-left: 20px;  */
+}
+.newsletter-block{
+    font-weight: 500;
+    /* display: flex; */
+}
+@media (max-width:992px) {
+    .newsletter-block{
+        font-weight: 500;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .btn-submit-newsletter{
+        margin-left: 0px !important;
+    }
+    .newsletter-social{
+        margin-top: 20px;
+    }
+    .footer-link{
+        margin-left: 0px !important;
+    }
+
+}
+/* .email-footer{
+    display: flex;
+}
+.newsletter-social{
+    display: flex;
+} */
+.btn-submit-newsletter{
+    font-size: 14px;
+    font-weight: 700;
+    padding-left: 35px;
+    padding-right: 35px;
+    margin-left: 20px;
+    white-space: nowrap;
+    height: 40px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-radius: 20px;
+}
+.input-newsletter{
+    padding-left: 40px;
+    padding-right: 20px;
+    border-width: 2px;
+    font-size: 13px;
+    border-color: #eae4e8;
+    background-color: #ffffffff;
+    
+    min-width: 290px;
+    height: 40px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-radius: 20px;
+}
+.title-newsletter{
+    margin-left: 17px;
+}
+.title-newsletter>h3{
+    display: block;
+    position: relative;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    /* margin-right: 20px; */
+}
+.footer-content{
+    display: flex;
+    padding-top: 30px;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    flex-wrap: wrap;
+    
+
+}
+.title-footer>h4{
+    display: block;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    padding-bottom: 12px;
+}
+.newsletter-social{
+   
+    display: flex;
+    gap: 20px;
+}
+.social-icon>i{
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid #aaaaaa;
+    color: #aaaaaa;
+    display: block;
+    text-align: center;
+    border-radius: 50%;
+   
+}
+.social-icon{
+    display: flex;
+    gap:10px;
+    margin-right: 5px;
+}
+.footer-link{
+    margin-left: 42px;
+}

@@ -54,13 +54,24 @@ public class ShopServlet extends HttpServlet {
         String queryprice = productDao.FIND_PRODUCT_GROUPBY_PRICE;
         String querycategory = productDao.FIND_PRODUCT_GROUPBY_CATEGORY;
         
-        //Get datafrom database
-   
-        List<Product> productList = productDao.getAllProduct(queryallproducts);
+        //Handle logic pagination
+        int count = productDao.CountProduct();//9
+        int endPage = count/3;
+        if(count % 3 != 0 ) {endPage++ ;}
+        String index = request.getParameter("index");
+        if(index == null) {index = "0";}
+        int indexPage = Integer.parseInt(index);
+        String activePagination = "active";
+        
+        //Get data from database
+        List<Product> productList = productDao.getAllProductByPagination(indexPage);
         List<Product> productListbyprice = productDao.getAllProduct(queryprice);
         List<Product> productListbycategory = productDao.getAllProduct(querycategory);
         List<productDetail> productDetails = productDao.getAllProductDetail(querycolor);
         
+        request.setAttribute("index", index);
+        request.setAttribute("activePagination", activePagination);
+        request.setAttribute("endPage", endPage);
         request.setAttribute("productList", productList);
         request.setAttribute("productListbyprice", productListbyprice);
         request.setAttribute("productListbycategory", productListbycategory);

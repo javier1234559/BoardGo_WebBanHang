@@ -14,7 +14,7 @@ import DAO.ProductDao;
 import entities.Product;
 import entities.productDetail;
 
-@WebServlet("/ShopServletByPrice")
+@WebServlet(urlPatterns = {"/ShopServletByPrice", "/HOME/ShopServletByPrice"})
 public class ShopServletByPrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +35,14 @@ public class ShopServletByPrice extends HttpServlet {
 	    
 		String priceid = request.getParameter("cid");
 		
-		System.out.print(priceid);
+		//Handle logic pagination
+        int count = productDao.CountProduct();//9
+        int endPage = count/3;
+        if(count % 3 != 0 ) {endPage++ ;}
+        String index = request.getParameter("index");
+        if(index == null) {index = "0";}
+        int indexPage = Integer.parseInt(index);
+        String activePagination = "active";
 		
         String queryallproducts = productDao.FIND_BY_PRODUCT_BY_PRICE;
         String querycolor = productDao.FIND_PRODUCTDETAIL_GROUPBY_COLOR;
@@ -49,10 +56,17 @@ public class ShopServletByPrice extends HttpServlet {
         List<Product> productListbycategory = productDao.getAllProduct(querycategory);
         List<productDetail> productDetails = productDao.getAllProductDetail(querycolor);
         
+        request.setAttribute("index", index);
+        request.setAttribute("activePagination", activePagination);
+        request.setAttribute("endPage", endPage);
+        
         request.setAttribute("productList", productList);
         request.setAttribute("productListbyprice", productListbyprice);
         request.setAttribute("productListbycategory", productListbycategory);
         request.setAttribute("productDetails", productDetails);
+        
+        request.setAttribute("cid", priceid);
+        request.setAttribute("active","background-color: aliceblue");
         RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
 	}

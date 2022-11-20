@@ -16,7 +16,7 @@ import DAO.ProductDao;
 import entities.Product;
 import entities.productDetail;
 
-@WebServlet("/ShopServletByLimit")
+@WebServlet(urlPatterns = {"/ShopServletByLimit", "/HOME/ShopServletByLimit"})
 public class ShopServletByLimit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,7 +37,14 @@ public class ShopServletByLimit extends HttpServlet {
 	    
 		int limitid = Integer.parseInt(request.getParameter("cid"));
 		
-		System.out.print(limitid);
+		//Handle logic pagination
+        int count = productDao.CountProduct();//9
+        int endPage = count/3;
+        if(count % 3 != 0 ) {endPage++ ;}
+        String index = request.getParameter("index");
+        if(index == null) {index = "0";}
+        int indexPage = Integer.parseInt(index);
+        String activePagination = "active";
 		
         String queryallproducts = productDao.FIND_BY_PRODUCT_BY_LIMIT;
         String querycolor = productDao.FIND_PRODUCTDETAIL_GROUPBY_COLOR;
@@ -51,6 +58,9 @@ public class ShopServletByLimit extends HttpServlet {
         List<Product> productListbycategory = productDao.getAllProduct(querycategory);
         List<productDetail> productDetails = productDao.getAllProductDetail(querycolor);
         
+        request.setAttribute("index", index);
+        request.setAttribute("activePagination", activePagination);
+        request.setAttribute("endPage", endPage);
         request.setAttribute("productList", productList);
         request.setAttribute("productListbyprice", productListbyprice);
         request.setAttribute("productListbycategory", productListbycategory);
