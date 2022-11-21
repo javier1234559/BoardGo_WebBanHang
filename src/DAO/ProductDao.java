@@ -47,7 +47,7 @@ public class ProductDao {
         public static final String FIND_BY_PRODUCT_BY_LIMIT = "SELECT * FROM product ORDER BY idproduct LIMIT ? ";
         //ShopServletPagination 
         public static final String COUNT_PRODUCT = "Select Count(*) from product ;";
-        public static final String FIND_PRODUCT_BY_PAGINATION = "SELECT * FROM product LIMIT ?,3"; //thay doi gia tri 3 thanh 9
+        public static final String FIND_PRODUCT_BY_PAGINATION = "SELECT * FROM product LIMIT ?,9"; //thay doi gia tri 3 thanh 9
         
         //DetailServlet
         public static final String FIND_PRODUCT_BY_ID = "SELECT * FROM product WHERE idproduct =?";
@@ -81,6 +81,7 @@ public class ProductDao {
 	              product.setPrice(rs.getLong("price"));
 	              product.setCategory(rs.getString("category"));
 	              product.setImage(rs.getString("image"));
+	              product.setDescription(rs.getString("MoTa"));
 	              list.add(product);
             }
         } catch (SQLException e) {
@@ -147,6 +148,7 @@ public class ProductDao {
 	              product.setPrice(rs.getLong("price"));
 	              product.setCategory(rs.getString("category"));
 	              product.setImage(rs.getString("image"));
+	              product.setDescription(rs.getString("MoTa"));
 	              list.add(product);
             }
         } catch (SQLException e) {
@@ -181,6 +183,7 @@ public class ProductDao {
 	              product.setPrice(rs.getLong("price"));
 	              product.setCategory(rs.getString("category"));
 	              product.setImage(rs.getString("image"));
+	              product.setDescription(rs.getString("MoTa"));
 	              list.add(product);
             }
         } catch (SQLException e) {
@@ -236,6 +239,7 @@ public class ProductDao {
 	              product.setPrice(rs.getLong("price"));
 	              product.setCategory(rs.getString("category"));
 	              product.setImage(rs.getString("image"));
+	              product.setDescription(rs.getString("MoTa"));
 	              list.add(product);
             }
         } catch (SQLException e) {
@@ -268,6 +272,7 @@ public class ProductDao {
 	              product.setPrice(rs.getLong("price"));
 	              product.setCategory(rs.getString("category"));
 	              product.setImage(rs.getString("image"));
+	              product.setDescription(rs.getString("MoTa"));
 	              list.add(product);
             }
         } catch (SQLException e) {
@@ -300,6 +305,7 @@ public class ProductDao {
 	              product.setPrice(rs.getLong("price"));
 	              product.setCategory(rs.getString("category"));
 	              product.setImage(rs.getString("image"));
+	              product.setDescription(rs.getString("MoTa"));
             }
         } catch (SQLException e) {
             // e.printStackTrace();
@@ -346,6 +352,43 @@ public class ProductDao {
          return list;
      
     }
+    
+    //ProductCart
+    public Product findByID(String code){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        Product pro = null;
+        try {
+        	String query = "select * from product where product.idproduct = ?";
+            conn = getConnection();
+            System.out.print("Connnect to database successfully");
+            stmt = conn.prepareStatement(query);
+                       	
+            stmt.setString(1, code);
+            
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+            	pro = new Product();
+	              pro.setIdproduct(rs.getInt("idproduct"));
+	              pro.setNameproduct(rs.getString("nameproduct"));
+	              pro.setPrice(rs.getLong("price"));
+	              pro.setCategory(rs.getString("category"));
+	              pro.setImage(rs.getString("image"));
+	              pro.setDescription(rs.getString("MoTa"));
+	              return pro;
+            }
+        } catch (SQLException e) {
+            // e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            close(stmt);
+            close(conn);
+        }
+        return pro;
+    }
+
+
     
     private static void close(Connection con) {
         if (con != null) {

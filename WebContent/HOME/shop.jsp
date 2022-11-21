@@ -152,7 +152,7 @@
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" style="max-width: 100%; height: 250px; object-fit: cover" src="${o.image}" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="ProductServlet?action=AddCart&code=${o.idproduct}"><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="DetailServlet?cid=${o.idproduct}"><i class="fa fa-search"></i></a>
                             </div>
@@ -180,9 +180,9 @@
                             <li class="page-item"><a class="page-link" href="ShopServlet?index=0"><span>Top</span></a></li>
                             
                             <c:forEach begin="1" end="${endPage}" var="i">
-                            	<li class="page-item ${index == ((i-1)*3) ? activePagination : null } "><a class="page-link" href="ShopServlet?index=${(i-1)*3}">${i}</a></li>
+                            	<li class="page-item ${index == ((i-1)*9) ? activePagination : null } "><a class="page-link" href="ShopServlet?index=${(i-1)*9}">${i}</a></li>
                             </c:forEach>
-                            <li class="page-item"><a class="page-link" href="ShopServlet?index=${(endPage-1)*3}">End</a></li>
+                            <li class="page-item"><a class="page-link" href="ShopServlet?index=${(endPage-1)*9}">End</a></li>
                         </ul>
                     </nav>
                 </div>
