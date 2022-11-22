@@ -118,7 +118,7 @@
                 <a class="text-decoration-none" href="ShopServletByCategory?cid=${o.idproduct}">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="${o.image}" alt="">
+                            <img style="height: 100%;" class="img-fluid" src="${o.image}" alt="">
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>${o.category}</h6>
@@ -279,6 +279,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js1/main.js"></script>
 </body>
 
 </html>

@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.mysql.cj.Session;
 
 import java.io.IOException;
 
@@ -25,17 +28,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import DAO.Generic;
+
 import DAO.ProductDao;
 import entities.Product;
 import entities.Product;
 import entities.productDetail;
 import entities.Cart;
 
-/**
- * Servlet implementation class ProductServlet
- */
-@WebServlet("/ProductServlet")
+
+@WebServlet(urlPatterns = {"/ProductServlet", "/HOME/ProductServlet"})
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static List<Cart> lsCart = new ArrayList<>();
@@ -51,9 +52,7 @@ public class ProductServlet extends HttpServlet {
 			
 		}
 	}
-
-
-       
+	
 	@SuppressWarnings("unlikely-arg-type")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
@@ -63,10 +62,10 @@ public class ProductServlet extends HttpServlet {
 		Cart cart = new Cart();
 		
 		if(action == null || action.equals("")) {
-			request.setAttribute("cart", lsCart);
+			request.setAttribute("lsCart", lsCart);
 			request.setAttribute("cost", cost);
 			request.getRequestDispatcher("/HOME/cart.jsp").forward(request, response);
-			request.getRequestDispatcher("/ShopServlet").forward(request, response);
+			//request.getRequestDispatcher("/ShopServlet").forward(request, response);
 			return;
 		}
 		
@@ -110,11 +109,15 @@ public class ProductServlet extends HttpServlet {
 				}
 				System.out.println("\n");
 				System.out.println("size:" +lsCart.size());
-				request.setAttribute("cart", lsCart);
+				System.out.println("size:" +lsCart.toString());
+				HttpSession s = request.getSession();
+				s.setAttribute("lsCart",lsCart);
+				//request.setAttribute("lsCart", lsCart);
 				request.setAttribute("cost", cost);
 				request.setAttribute("code", code);
 				request.getRequestDispatcher("/HOME/cart.jsp").forward(request, response);
-				request.getRequestDispatcher("/ShopServlet").forward(request, response);
+				//request.getRequestDispatcher("/ShopServlet").forward(request, response);
+				
 				break;
 				
 			case "DelCart":
@@ -128,19 +131,18 @@ public class ProductServlet extends HttpServlet {
 						break;
 					}
 				}
-				request.setAttribute("cart", lsCart);
+				request.setAttribute("lsCart", lsCart);
 				request.setAttribute("cost", cost);
 				request.getRequestDispatcher("/HOME/cart.jsp").forward(request, response);
 				break;
-				
+			
+			
 		}
 		
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

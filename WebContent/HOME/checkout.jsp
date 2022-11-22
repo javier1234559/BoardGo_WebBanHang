@@ -56,20 +56,16 @@
                 <div class="bg-light p-30 mb-5">
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
+                            <label>Tên</label>
+                            <input class="form-control" type="text" placeholder="Minh Nhật">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>E-mail</label>
                             <input class="form-control" type="text" placeholder="example@email.com">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
+                            <label>Số Điện Thoại</label>
+                            <input class="form-control" type="text" placeholder="0123456789">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Address Line 1</label>
@@ -80,7 +76,7 @@
                             <input class="form-control" type="text" placeholder="123 Street">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Country</label>
+                            <label>Tỉnh</label>
                             <select class="custom-select">
                                 <option selected>United States</option>
                                 <option>Afghanistan</option>

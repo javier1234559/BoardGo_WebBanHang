@@ -41,26 +41,23 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String url = "/HOME/index.jsp";	
-       
-        String queryallproducts = productDao.FIND_ALL_PRODUCT;
-        String querycolor = productDao.FIND_PRODUCTDETAIL_GROUPBY_COLOR;
-        String queryprice = productDao.FIND_PRODUCT_GROUPBY_PRICE;
+    	String url = "/HOME/index.jsp";
+        
+    	String querytop3products = productDao.TOP_3_PRODUCT;
+        String querytop12products = productDao.TOP_12_PRODUCT;
         String querycategory = productDao.FIND_PRODUCT_GROUPBY_CATEGORY;
+       
+       
+        //Get data from database
         
-        //Get datafrom database
-   
-        List<Product> productList = productDao.getAllProduct(queryallproducts);
-        List<Product> productListbyprice = productDao.getAllProduct(queryprice);
+        List<Product> top3product = productDao.getAllProduct(querytop3products);
+        List<Product> top12product = productDao.getAllProduct(querytop12products);
         List<Product> productListbycategory = productDao.getAllProduct(querycategory);
-        List<productDetail> productDetails = productDao.getAllProductDetail(querycolor);
         
-        request.setAttribute("productList", productList);
-        request.setAttribute("productListbyprice", productListbyprice);
+        request.setAttribute("top3product", top3product);
+        request.setAttribute("top12product", top12product);
         request.setAttribute("productListbycategory", productListbycategory);
-        request.setAttribute("productDetails", productDetails);
         RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
-        
     }
 }

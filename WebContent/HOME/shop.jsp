@@ -130,7 +130,6 @@
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sắp xếp theo</button>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="ShopServlet">Mới Nhất</a>
-                                    <a class="dropdown-item" href="#">Đánh Gía Cao</a>
                                 </div>
                             </div>
                             <div class="btn-group ml-2">

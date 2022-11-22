@@ -93,14 +93,14 @@
                     
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Màu:</strong>
-                        <form>
 	                        <c:forEach var="o" items="${productDetails}" >
+                        	<form action="/ProductServlet" method="get" id="form1">
 	                            <div class="custom-control custom-radio custom-control-inline">
-	                                <input type="radio" class="custom-control-input" id="${o.idimage }" name="color">
+	                                <input type="radio" class="custom-control-input" id="${o.idimage }" value="${o.idproduct}" name="cid" >
 	                                <label class="custom-control-label" for="${o.idimage}">${o.color}</label>
 	                            </div>                        
+                        	</form>
 	                        </c:forEach>
-                        </form>
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
@@ -116,11 +116,10 @@
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                        <a type="link" href="ProductServlet?action=AddCart&code=${DetailProduct.idproduct}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1" ></i>Thêm Vào Giỏ</a>
                     </div>
                     <div class="d-flex pt-2">
-                        <strong class="text-dark mr-2">Share on:</strong>
+                        <strong class="text-dark mr-2">Chia sẻ:</strong>
                         <div class="d-inline-flex">
                             <a class="text-dark px-2" href="">
                                 <i class="fab fa-facebook-f"></i>
@@ -143,8 +142,8 @@
             <div class="col">
                 <div class="bg-light p-30">
                     <div class="nav nav-tabs mb-4">
-                        <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
+                        <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Mô Tả</a>
+                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Thông Tin</a>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">

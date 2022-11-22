@@ -26,9 +26,9 @@ public class searchServlet extends HttpServlet {
 		
 		
 		//Handle logic pagination
-        int count = dao.CountProduct();//9
-        int endPage = count/3;
-        if(count % 3 != 0 ) {endPage++ ;}
+        int count = dao.CountProduct();
+        int endPage = count/9;
+        if(count % 9 != 0 ) {endPage++ ;}
         String index = request.getParameter("index");
         if(index == null) {index = "0";}
         int indexPage = Integer.parseInt(index);

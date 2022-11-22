@@ -34,14 +34,14 @@ public class ProductDao {
         
         //ShopServlet 
         public static final String FIND_ALL_PRODUCT = "SELECT * FROM product ORDER BY idproduct DESC;";
-        public static final String FIND_PRODUCTDETAIL_GROUPBY_COLOR = "SELECT * FROM image_product group by color ORDER BY idimage;";
-        public static final String FIND_PRODUCT_GROUPBY_PRICE = "SELECT * FROM product group by price ORDER BY price asc;";
-        public static final String FIND_PRODUCT_GROUPBY_CATEGORY = "SELECT * FROM product group by category ORDER BY idproduct asc;";
+        public static final String FIND_PRODUCTDETAIL_GROUPBY_COLOR = "SELECT * FROM image_product group by color ORDER BY idimage LIMIT 7 ;";
+        public static final String FIND_PRODUCT_GROUPBY_PRICE = "SELECT * FROM product group by price ORDER BY price DESC LIMIT 6;";
+        public static final String FIND_PRODUCT_GROUPBY_CATEGORY = "SELECT * FROM product group by category ORDER BY idproduct;";
         
         //ShopServletByCategory
         public static final String FIND_BY_PRODUCT_BY_CATEGORY = "SELECT * FROM product WHERE category IN (SELECT category FROM product  WHERE idproduct = ? ) lIMIT 5 ;";
         public static final String FIND_BY_PRODUCT_BY_PRICE = "SELECT * FROM product WHERE price IN (SELECT price FROM product  WHERE idproduct = ? );";
-        public static final String FIND_BY_PRODUCT_BY_COLOR = "SELECT * FROM product WHERE idproduct IN (SELECT distinct idproduct FROM image_product  WHERE color in (SELECT distinct color FROM image_product  WHERE idimage = ?));";
+        public static final String FIND_BY_PRODUCT_BY_COLOR = "SELECT * FROM product WHERE idproduct IN (SELECT distinct idproduct FROM image_product  WHERE color in (SELECT distinct color FROM image_product  WHERE idimage = ?)) ;";
         
         //ShopServletByLIMIT
         public static final String FIND_BY_PRODUCT_BY_LIMIT = "SELECT * FROM product ORDER BY idproduct LIMIT ? ";
@@ -52,6 +52,11 @@ public class ProductDao {
         //DetailServlet
         public static final String FIND_PRODUCT_BY_ID = "SELECT * FROM product WHERE idproduct =?";
         public static final String FIND_PRODUCT_DETAIL_BY_IDPRODUCT = "Select * From image_product where idproduct = ?";
+        
+        //HomeServlet
+        public static final String TOP_3_PRODUCT = "SELECT * FROM product ORDER BY idproduct LIMIT 3";
+        public static final String TOP_12_PRODUCT = "SELECT * FROM product ORDER BY idproduct asc LIMIT 12";
+        
         
         
     private Connection getConnection() {
