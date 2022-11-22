@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,9 +40,9 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="ShopServlet">Shop</a>
-                    <span class="breadcrumb-item active">Shopping Cart</span>
+                    <a class="breadcrumb-item text-dark" href="#">Trang Chủ</a>
+                    <a class="breadcrumb-item text-dark" href="ShopServlet">Cửa Hàng</a>
+                    <span class="breadcrumb-item active">Giỏ Hàng</span>
                 </nav>
             </div>
         </div>
@@ -55,20 +57,19 @@
                 <table class="table table-light table-borderless table-hover text-center mb-0">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Products</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remove</th>
+                            <th>Sản Phẩm </th>
+                            <th>Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Tổng</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody class="align-middle">
                         
-                        <c:forEach items= "${cart}" var="o">
+                    <c:forEach items="${lsCart}" var="o">
 	                    <tr>
-	                    	
                             <td class="align-middle"><img src="${o.getPro().image}" alt="" style="width: 50px;"> ${o.getPro().nameproduct}</td>
-                            <td class="align-middle">${o.getPro().price}</td>
+                            <td class="align-middle"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.getPro().price}"/>VNĐ</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -84,7 +85,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">${o.getPro().price}</td>
+                            <td class="align-middle"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.getPro().price}"/>VNĐ</td>
                             <td class="align-middle"><a href="ProductServlet?action=DelCart&name=${o.getPro().idproduct}"><i class="fa fa-times"></i></a></td>
                         </tr>
 					</c:forEach>
@@ -95,30 +96,30 @@
             <div class="col-lg-4">
                 <form class="mb-30" action="">
                     <div class="input-group">
-                        <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
+                        <input type="text" class="form-control border-0 p-4" placeholder="Mã giảm giá">
                         <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
+                            <button class="btn btn-primary">Áp Dụng</button>
                         </div>
                     </div>
                 </form>
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Tổng Cộng</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
-                            <h6>Subtotal</h6>
-                            <h6>$150</h6>
+                            <h6>Tạm tính</h6>
+                            <h6>${cost}</h6>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
+                            <h6 class="font-weight-medium">Phí giao hàng</h6>
+                            <h6 class="font-weight-medium">1000 VNĐ</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
-                            <h5>Total</h5>
-                            <h5>$160</h5>
+                            <h5>Tổng</h5>
+                            <h5>${cost == 0 ? 0 : (cost + 1000)} VNĐ</h5>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiếp đến Thanh Toán</button>
                     </div>
                 </div>
             </div>

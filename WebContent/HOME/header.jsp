@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!-- Topbar Start -->
     <div class="container-fluid ">
         <div class="row align-items-center bg-light px-xl-5 d-none d-lg-flex flex-between">
             <div class="col-lg-4">
-                <a href="index.jsp" class="text-decoration-none">
+                <a href="HomeServlet" class="text-decoration-none">
                     <div class="row">
                         <div class="logo-shop">
                             <img src="./image/logo.png" alt="logoweb">
@@ -45,25 +47,22 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.jsp" class="nav-item nav-link active">Trang Chủ</a>
+                            <a href="HomeServlet" class="nav-item nav-link active">Trang Chủ</a>
                             <a href="ShopServlet" class="nav-item nav-link">Cửa Hàng</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Thông Tin <i class="fa fa-angle-down mt-1"></i></a>
                                 <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.jsp" class="dropdown-item">Giỏ Hàng</a>
+                                    <a href="ProductServlet" class="dropdown-item">Giỏ Hàng</a>
                                     <a href="checkout.jsp" class="dropdown-item">Thanh Toán</a>
                                 </div>
                             </div>
                             <a href="contact.jsp" class="nav-item nav-link">Liên Hệ</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="" class="btn px-0">
-                                <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
+                            
                             <a href="" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${lsCart.size() }</span>
                             </a>
                         </div>
                     </div>

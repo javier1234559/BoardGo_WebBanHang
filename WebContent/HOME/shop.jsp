@@ -40,9 +40,9 @@
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Home</a>
-                <a class="breadcrumb-item text-dark" href="ShopServlet">Shop</a>
-                <span class="breadcrumb-item active">Shop List</span>
+                <a class="breadcrumb-item text-dark" href="#">Trang Chủ</a>
+                <a class="breadcrumb-item text-dark" href="ShopServlet">Cửa Hàng</a>
+                <span class="breadcrumb-item active">Danh Sách Sản Phẩm</span>
             </nav>
         </div>
     </div>
@@ -115,8 +115,7 @@
             <!-- Size End -->
         </div>
         <!-- Shop Sidebar End -->
-
-
+        
         <!-- Shop Product Start -->
         <div class="col-lg-9 col-md-8">
             <div class="row pb-3">
@@ -153,7 +152,7 @@
                             <img class="img-fluid w-100" style="max-width: 100%; height: 250px; object-fit: cover" src="${o.image}" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href="ProductServlet?action=AddCart&code=${o.idproduct}"><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                
                                 <a class="btn btn-outline-dark btn-square" href="DetailServlet?cid=${o.idproduct}"><i class="fa fa-search"></i></a>
                             </div>
                         </div>
