@@ -107,17 +107,18 @@
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Tạm tính</h6>
-                            <h6>${cost}</h6>
+                            <h6><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${cost == 0 ? 0 : (cost + 10000)}"/>VNĐ</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Phí giao hàng</h6>
-                            <h6 class="font-weight-medium">1000 VNĐ</h6>
+                            <h6 class="font-weight-medium"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "10000"/>VNĐ</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Tổng</h5>
-                            <h5>${cost == 0 ? 0 : (cost + 1000)} VNĐ</h5>
+                            <h5><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${cost == 0 ? 0 : (cost + 10000)}"/>VNĐ</h5>
+                            
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiếp đến Thanh Toán</button>
                     </div>

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import com.mysql.cj.Session;
 
 import java.io.IOException;
@@ -41,6 +43,7 @@ public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static List<Cart> lsCart = new ArrayList<>();
 	public static long cost = 0;
+	public static int numberOfCart = 0 ;
 	
 	private ProductDao productDao ;
 	
@@ -76,6 +79,7 @@ public class ProductServlet extends HttpServlet {
 				pro = dao.findByID(code);
 				if(pro != null) {
 					if(lsCart.isEmpty()) {
+						numberOfCart = numberOfCart +1;
 						cost = cost + pro.getPrice();
 						cart.setPro(pro);
 						cart.setQuantity(1);
@@ -83,6 +87,7 @@ public class ProductServlet extends HttpServlet {
 					}else {
 						for(Cart item : lsCart) {
 							if(item.getPro().getIdproduct() == pro.getIdproduct()) {
+								numberOfCart = numberOfCart +1;
 								cost = cost + pro.getPrice();
 								int qnt = item.getQuantity();
 								item.setQuantity(qnt + 1);
@@ -91,6 +96,7 @@ public class ProductServlet extends HttpServlet {
 							}
 						}
 						if(notice != 1) {
+							numberOfCart = numberOfCart +1;
 							cost = cost + pro.getPrice();
 							cart.setPro(pro);
 							cart.setQuantity(1);
@@ -110,10 +116,11 @@ public class ProductServlet extends HttpServlet {
 				System.out.println("\n");
 				System.out.println("size:" +lsCart.size());
 				System.out.println("size:" +lsCart.toString());
-				HttpSession s = request.getSession();
-				s.setAttribute("lsCart",lsCart);
+				HttpSession ses = request.getSession();
+				ses.setAttribute("numberOfCart", numberOfCart);
+				ses.setAttribute("lsCart",lsCart);
+				ses.setAttribute("cost", cost);
 				//request.setAttribute("lsCart", lsCart);
-				request.setAttribute("cost", cost);
 				request.setAttribute("code", code);
 				request.getRequestDispatcher("/HOME/cart.jsp").forward(request, response);
 				//request.getRequestDispatcher("/ShopServlet").forward(request, response);
@@ -125,14 +132,17 @@ public class ProductServlet extends HttpServlet {
 				for(Cart item : lsCart) {
 					int itemId = item.getPro().getIdproduct();
 					if(id == itemId) {
+						numberOfCart = numberOfCart - item.getQuantity();
 						cost = cost - (item.getPro().getPrice() * item.getQuantity());
 						int id1 = lsCart.indexOf(item);
 						lsCart.remove(id1);
 						break;
 					}
 				}
-				request.setAttribute("lsCart", lsCart);
-				request.setAttribute("cost", cost);
+				HttpSession ses2 = request.getSession();
+				ses2.setAttribute("numberOfCart", numberOfCart);
+				ses2.setAttribute("lsCart",lsCart);
+				ses2.setAttribute("cost", cost);
 				request.getRequestDispatcher("/HOME/cart.jsp").forward(request, response);
 				break;
 			
