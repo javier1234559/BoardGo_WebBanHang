@@ -103,15 +103,6 @@ public class ProductServlet extends HttpServlet {
 							lsCart.add(cart);
 						}
 					}
-//					if(notice != 1) {
-//						cart.setPro(pro);
-//						cart.setQuantity(1);
-//						lsCart.add(cart);
-//					}
-//					cost = cost + pro.getPrice();
-//					cart.setPro(pro);
-//					cart.setQuantity(1);
-//					lsCart.add(cart);
 				}
 				System.out.println("\n");
 				System.out.println("size:" +lsCart.size());
@@ -145,7 +136,35 @@ public class ProductServlet extends HttpServlet {
 				ses2.setAttribute("cost", cost);
 				request.getRequestDispatcher("/HOME/cart.jsp").forward(request, response);
 				break;
-			
+				
+			case "SubCart":
+				int codeSub = Integer.parseInt(request.getParameter("codeSub"));
+				for(Cart item: lsCart) {
+					int idItem = item.getPro().getIdproduct();
+					if(codeSub == idItem) {
+						if(item.getQuantity() == 1) {
+							numberOfCart = numberOfCart - 1;
+							cost = cost - item.getPro().getPrice();
+							lsCart.remove(lsCart.indexOf(item));
+							break;
+						}
+						else {
+							numberOfCart = numberOfCart - 1;
+							item.setQuantity(item.getQuantity() - 1);
+							cost = cost - item.getPro().getPrice();
+							break;
+						}
+						
+					}
+				}
+				HttpSession ses3 = request.getSession();
+				ses3.setAttribute("numberOfCart", numberOfCart);
+				ses3.setAttribute("lsCart",lsCart);
+				ses3.setAttribute("cost", cost);
+				// request.setAttribute("cart", lsCart);
+				// request.setAttribute("cost", cost);
+				request.getRequestDispatcher("/HOME/cart.jsp").forward(request, response);
+				break;
 			
 		}
 		

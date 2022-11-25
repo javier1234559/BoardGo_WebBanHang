@@ -105,15 +105,19 @@
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-minus">
-                                    <i class="fa fa-minus"></i>
-                                </button>
+                                <a href="ProductServlet?action=SubCart&codeSub=${o.getPro().idproduct}" >
+                                   <button class="btn btn-sm btn-primary btn-minus" >
+                                   <i class="fa fa-minus"></i>
+                                   </button>
+                               	</a>
                             </div>
                             <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-plus">
-                                    <i class="fa fa-plus"></i>
-                                </button>
+                                <a href="ProductServlet?action=AddCart&code=${o.getPro().idproduct}" >
+                                   <button class="btn btn-sm btn-primary btn-plus">
+                                       <i class="fa fa-plus"></i>
+                                   </button>                                    
+                                </a>
                             </div>
                         </div>
                         <a type="link" href="ProductServlet?action=AddCart&code=${DetailProduct.idproduct}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1" ></i>Thêm Vào Giỏ</a>

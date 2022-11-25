@@ -60,9 +60,9 @@
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             
-                            <a href="" class="btn px-0 ml-3">
+                            <a href="ProductServlet" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${ numberOfCart}</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">${ numberOfCart == null ? 0 :numberOfCart }</span>
                             </a>
                         </div>
                     </div>

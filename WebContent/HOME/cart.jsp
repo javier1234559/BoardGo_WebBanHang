@@ -72,16 +72,21 @@
                             <td class="align-middle"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.getPro().price}"/>VNĐ</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
+                               
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
+	                                     <a href="ProductServlet?action=SubCart&codeSub=${o.getPro().idproduct}" >
+	                                        <button class="btn btn-sm btn-primary btn-minus" >
+	                                        <i class="fa fa-minus"></i>
+	                                        </button>
+	                                	</a>
                                     </div>
                                     <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="${o.getQuantity()}">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
+	                                    <a href="ProductServlet?action=AddCart&code=${o.getPro().idproduct}" >
+	                                        <button class="btn btn-sm btn-primary btn-plus">
+	                                            <i class="fa fa-plus"></i>
+	                                        </button>                                    
+	                                    </a>
                                     </div>
                                 </div>
                             </td>
