@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -207,15 +208,15 @@
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">BẠN CÓ THỂ THÍCH</span></h2>
         <div class="row px-xl-5">
             <div class="col">
-                <div  class="owl-carousel related-carousel">
+                <div class="owl-carousel related-carousel">
                  <c:forEach var="o" items="${productListByCategory}" >
                     <div class="product-item bg-light">
                         <div class="product-img position-relative overflow-hidden">
-                            <!-- <img class="img-fluid w-100" src="img/product-1.jpg" alt=""> -->
-                            <img class="img-fluid w-100" src="${o.image}" alt="">
+                            <img style=" width: 100%;
+  height: 100%;
+  object-fit: cover;" class="img-fluid w-100" src="${o.image}" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="DetailServlet?cid=${o.idproduct}"><i class="fa fa-search"></i></a>
                             </div>
                         </div>

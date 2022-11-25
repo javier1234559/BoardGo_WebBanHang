@@ -60,6 +60,7 @@ public class DetailServlet extends HttpServlet {
         request.setAttribute("DetailProduct", DetailProduct);
         request.setAttribute("productDetails", productDetails);
         request.setAttribute("productListByCategory", productListByCategory);
+        System.out.print(productListByCategory);
         
         RequestDispatcher dispatcher  = request.getRequestDispatcher(url);
         dispatcher.forward(request, response);
