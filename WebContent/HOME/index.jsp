@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+
 <%
 	if(session.getAttribute("name")==null){
 		response.sendRedirect("login.jsp");
@@ -140,7 +141,7 @@
             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="${top12product[0].image }" alt="">
+                        <img style="max-width: 100%; height: 250px; object-fit: cover" class="img-fluid w-100" src="${top12product[0].image }" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href="ProductServlet?action=AddCart&code=${top12product[0].idproduct}"><i class="fa fa-shopping-cart"></i></a>
                            

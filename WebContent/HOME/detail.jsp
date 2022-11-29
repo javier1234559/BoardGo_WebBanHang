@@ -212,11 +212,9 @@
                  <c:forEach var="o" items="${productListByCategory}" >
                     <div class="product-item bg-light">
                         <div class="product-img position-relative overflow-hidden">
-                            <img style=" width: 100%;
-  height: 100%;
-  object-fit: cover;" class="img-fluid w-100" src="${o.image}" alt="">
+                            <img style="max-width: 100%; height: 250px; object-fit: cover" class="img-fluid w-100" src="${o.image}" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="ProductServlet?action=AddCart&code=${o.idproduct}"><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="DetailServlet?cid=${o.idproduct}"><i class="fa fa-search"></i></a>
                             </div>
                         </div>
@@ -255,7 +253,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
+	<script src="HOME/lib/easing/easing.min.js"></script>
+    <script src="HOME/lib/owlcarousel/owl.carousel.min.js"></script>
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>

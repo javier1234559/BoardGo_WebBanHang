@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ForgotPassword
  */
-@WebServlet("/forgotPassword")
+@WebServlet(urlPatterns = {"/forgotPassword", "/HOME/forgotPassword"} )
 public class ForgotPassword extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

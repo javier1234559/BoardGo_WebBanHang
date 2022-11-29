@@ -5,6 +5,6 @@
 	if(session.getAttribute("name")==null){
 		response.sendRedirect("login.jsp");
 	}else{
-		 response.sendRedirect("HomeServlet");
+		 response.sendRedirect("HOME/HomeServlet");
 	}
 %>

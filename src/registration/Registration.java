@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class RegistrationServlet
  */
-@WebServlet("/register")
+@WebServlet(urlPatterns = {"/register", "/HOME/register"} )
 public class Registration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

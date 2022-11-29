@@ -62,12 +62,12 @@
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="price-all">
                         <label for="size-all"><a href="ShopServlet" style="text-decoration:none;color:<%="red"%>;">TẤT CẢ GIÁ</a></label>
-                        <span class="badge border font-weight-normal">1000</span>
+                        
                     </div>
                     <c:forEach items="${productListbyprice}" var="o" >
 	                    <div style="${cid == o.idproduct ? active : null }" class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
 	                        <label class="" for="size-1"><a href="ShopServletByPrice?cid=${o.idproduct}" style="text-decoration:none;color:#6C757D;">${o.price}</a></label>
-	                        <span class="badge border font-weight-normal">150</span>
+	               
 	                    </div>
                     </c:forEach>
                  
@@ -82,12 +82,12 @@
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="color-all">
                         <label style="<%="color:red;" %>" for="size-all"><a href="ShopServlet" style="text-decoration:none;color:<%="red"%>;">TẤT CẢ MÀU</a></label>
-                        <span class="badge border font-weight-normal">1000</span>
+                    
                     </div>
                     <c:forEach items="${productDetails}" var="o">
 	                       <div style="${cid == o.idimage ? active : null }"  class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
 	                        <label class="" for="size-1"><a href="ShopServletByColor?cid=${o.idimage}" style="text-decoration:none;color:#6C757D;">${o.color}</a></label>
-	                        <span class="badge border font-weight-normal">99</span>
+	                       
 	                    	</div>
                     </c:forEach>
                  
@@ -102,12 +102,12 @@
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         
                         <label style="<%="color:red;" %>" for="size-all"><a href="" style="text-decoration:none;color:<%="red"%>;">TẤT CẢ LOẠI</a></label>
-                        <span class="badge border font-weight-normal">1000</span>
+                       
                     </div>
                     <c:forEach items="${productListbycategory}" var="o" >
                     <div style="${cid == o.idproduct ? active : null }" class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <label class="" for="size-1"><a href="ShopServletByCategory?cid=${o.idproduct}" style="text-decoration:none;color:#6C757D;">${o.category}</a></label>
-                        <span class="badge border font-weight-normal">150</span>
+                       
                     </div>
 					</c:forEach>
                 </form>

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ValidateOtp
  */
-@WebServlet("/ValidateOtp")
+@WebServlet(urlPatterns = {"/ValidateOtp", "/HOME/ValidateOtp"})
 public class ValidateOtp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -22,14 +22,7 @@ public class ProductDao {
         private static final String ID = "root";
         private static final String PASS = "nhat2382002";
 
-        private static final String DELETE = "DELETE FROM user WHERE id=?";
-        private static final String FIND_BY_ID = "SELECT * FROM user WHERE id=?";
-        private static final String FIND_BY_NAME = "SELECT * FROM user WHERE name=?";
-        private static final String INSERT = "INSERT INTO user(name, tel, passwd) VALUES(?, ?, ?)";
-        private static final String UPDATE = "UPDATE user SET name=?, tel=?, passwd=? WHERE id=?";
-        
-        
-        public static final String FIND_ALL_RANK = "SELECT DISTINCT productrank FROM product ORDER BY productrank";
+  
         private static final String FIND_BY_PRODUCT_IDCOLOR = "SELECT * FROM product ,image_product where product.idproduct = image_product.idproduct AND image_product.color='?'";
         
         //ShopServlet 
@@ -57,6 +50,7 @@ public class ProductDao {
         public static final String TOP_3_PRODUCT = "SELECT * FROM product ORDER BY idproduct LIMIT 3";
         public static final String TOP_12_PRODUCT = "SELECT * FROM product ORDER BY idproduct asc LIMIT 12";
         
+        //ContactServlet
         
         
     private Connection getConnection() {
@@ -392,7 +386,6 @@ public class ProductDao {
         }
         return pro;
     }
-
 
     
     private static void close(Connection con) {

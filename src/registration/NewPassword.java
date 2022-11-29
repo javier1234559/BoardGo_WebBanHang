@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class NewPassword
  */
-@WebServlet("/newPassword")
+@WebServlet(urlPatterns = {"/newPassword", "/HOME/newPassword"})
 public class NewPassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

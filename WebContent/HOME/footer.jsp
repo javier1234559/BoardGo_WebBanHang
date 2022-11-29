@@ -11,8 +11,11 @@
                         <div class="newsletter-block">
                             <div class="row ">
                                 <div class="title-newsletter col-lg-3"><h3>Đăng ký nhận tin</h3></div>
-                                <input class="input-newsletter col-lg-3 " type="email" name="email" required placeholder="Nhập email của bạn">
-                                <button type="submit" class="btn-submit-newsletter col-lg-2 ">Đăng Ký</button>
+                                <form action="ContactServlet" method="GET" >
+                                <input class="input-newsletter col-lg-3 " type="email" name="footerEmail" required placeholder="Nhập email của bạn">
+                                <button style="padding-left:10px;" type="submit" class="btn-submit-newsletter col-lg-2 ">Đăng kí</button>
+                                </form>
+                                
                             </div>
                         </div>
                     </div>
