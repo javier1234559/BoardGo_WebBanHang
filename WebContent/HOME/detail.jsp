@@ -106,7 +106,7 @@
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
-                                <a href="ProductServlet?action=SubCart&codeSub=${o.getPro().idproduct}" >
+                                <a href="ProductServlet?action=SubCart&codeSub=${DetailProduct.idproduct}" >
                                    <button class="btn btn-sm btn-primary btn-minus" >
                                    <i class="fa fa-minus"></i>
                                    </button>
@@ -114,7 +114,7 @@
                             </div>
                             <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
                             <div class="input-group-btn">
-                                <a href="ProductServlet?action=AddCart&code=${o.getPro().idproduct}" >
+                                <a href="ProductServlet?action=AddCart&code=${DetailProduct.idproduct}" >
                                    <button class="btn btn-sm btn-primary btn-plus">
                                        <i class="fa fa-plus"></i>
                                    </button>                                    

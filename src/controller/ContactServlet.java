@@ -22,11 +22,7 @@ import javax.servlet.RequestDispatcher;
 public class ContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
-	private String host = "smtp.gmail.com";
-    private String port = "587";
-    private String user = "nguyenhue1234559@gmail.com";
-    private String pass = "ndvzqajbnjvnpokm";
-	 
+	
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -35,7 +31,7 @@ public class ContactServlet extends HttpServlet {
 		String content = request.getParameter("message");
 		
 		subject = "Cảm ơn phản hồi từ " + subject;
-		content = content + "đã được gửi thành công !";
+		content = content + " đã được gửi thành công !";
 		String footerEmail = request.getParameter("footerEmail");
 		if(footerEmail != null) {
 			email = footerEmail;
